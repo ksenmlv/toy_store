@@ -1,4 +1,4 @@
-function Header() {
+function Header(props) {
     return(
         <header>
             {/* левая часть заголовка*/}
@@ -12,7 +12,7 @@ function Header() {
 
             {/* правая часть заголовка */}
             <ul className="headerRight">
-            <li>
+            <li onClick={props.onClickCard}>
                 <img width={18} height={18} src="/img/basket.svg" />
                 <span>10$</span>
             </li>

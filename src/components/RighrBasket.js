@@ -1,45 +1,55 @@
-function RightBasket() {
+import { useState } from "react";
+
+function RightBasket({onClose, onRemove, items=[]}) {
+    
+    
+    
     return (
-        <div style={{display: 'none'}} className="overlay">
+        <div className="overlay">
           <div className="rightSide">
-            <h2>Basket  <img src="/img/cancel_active.svg" alt="button of cancel" className="btn_cancel"/></h2>
+            <h2>Cart  <img onClick={onClose} src="/img/cancel_active.svg" alt="button of cancel" className="btn_close_basket"/></h2>
+
+            {/* пустая корзина */}
+            {items.length===0 && <div className="emptyCart">
+                <img className="cart" src="/img/empty_basket.svg" alt="empty basket"/>
+                <h2>Cart empty☹️</h2>
+                <p>*add at least 1 product to place an order</p>
+                <button onClick={onClose}>
+                    <img src="/img/arrow_left.svg" alt="arrow" />
+                    Go back
+                </button>
+            </div>}
 
             {/* товары в корзине */}
-            <div className="items">
-                <div className="cardItem">
-                <img src="img/toys/bearbrick1.png" alt="bearbrick_1" className="img_toy"/>
-                <div>
-                    <p>Bearbrick & Sesame Street 'Cookie Monster Costume'</p>
-                    <b>317$</b>
+            {items.map((item) => (
+                <div key={item.id} className="items">
+                    <div className="cardItem">
+                        <img src={item.imageUrl} alt="bearbrick" className="img_toy"/>
+                        <div>
+                            <p>{item.title}</p>
+                            <b>{item.price}$</b>
+                        </div>
+                        <img onClick={() => onRemove(item.id)} src="/img/cancel_active.svg" alt="button of cancel" className="btn_cancel" />
+                    </div>
                 </div>
-                <img src="/img/cancel_active.svg" alt="button of cancel" className="btn_cancel"/>
-                </div>
-
-                <div className="cardItem">
-                <img src="img/toys/bearbrick2.png" alt="bearbrick_2" className="img_toy"/>
-                <div>
-                    <p>Bearbrick & Despicable Me 'Kevin Minion'</p>
-                    <b>299$</b>
-                </div>
-                <img src="/img/cancel_active.svg" alt="button of cancel" className="btn_cancel"/>
-                </div>
-            </div>
+            ))} 
+            
 
             {/* итого и налог с кнопкой*/}
-            <ul>
+            {items.length!==0 && <ul>
                 <li>
-                <span>Tax 10%:</span>
-                <div></div>
-                <b>61.6$</b>
+                    <span>Tax 10%:</span>
+                    <div></div>
+                    <b>61.6$</b>
                 </li>
                 <li>
-                <span>Total</span>
-                <div></div>
-                <b>677.6$</b>
+                    <span>Total</span>
+                    <div></div>
+                    <b>677.6$</b>
                 </li>
-                <button className="btn_order">Make an order<img src="/img/arrow.svg" alt="arrow" /></button>
-            </ul>
-                        
+                <button className="btn_order">Make an order<img src="/img/arrow_right.svg" alt="arrow" /></button>
+            </ul>}            
+
           </div>
         </div>
     )

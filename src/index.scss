@@ -54,6 +54,7 @@ header {
 
     li {
       margin-right: 30px;
+      cursor: pointer;
     }
     img {
       margin: 0;
@@ -69,7 +70,7 @@ header {
   height: auto;
 
 
-
+//поиск товара
   .header2 {
     margin: 40px;
     display: flex;
@@ -78,6 +79,7 @@ header {
 
     //поле поиска товаров
     .searchBlock {
+      position: relative;
       border: 1px solid #f3f3f3;
       padding: 0 15px;
       display: flex;
@@ -86,6 +88,15 @@ header {
       input {
         border: 0;
         padding: 10px;
+        outline: none;
+      }
+
+      .clearSearch {
+        position: absolute;
+        right: 0;
+        width: 27px;
+        top: 5px;
+        cursor: pointer;
       }
     }
   }
@@ -116,6 +127,7 @@ header {
     cursor: pointer;
   }
 
+
   .cardBottom {
     display: flex;
     justify-content: space-between;
@@ -130,6 +142,10 @@ header {
   p {
     font-size: 15px;
   }
+
+  .plus {
+    cursor: pointer;
+  }
 }
 
 .card:hover {
@@ -138,15 +154,15 @@ header {
 }
 
 
-.button {
-  background: #FFFFFF;
-  border: 3px solid #f1f1f1;
-  box-sizing: border-box;
-  border-radius: 10px;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-  }
+// .button {
+//   background: #FFFFFF;
+//   border: 3px solid #f1f1f1;
+//   box-sizing: border-box;
+//   border-radius: 10px;
+//   height: 30px;
+//   width: 30px;
+//   cursor: pointer;
+//   }
 
   
 //линия заголовка перед карточками
@@ -177,7 +193,7 @@ header {
     padding: 30px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto;
   }
 
   h2 {
@@ -187,14 +203,17 @@ header {
     font-size: 40px;
     display: flex;
     justify-content: space-between;
-    img {
+
+    //не работает (иконка закрытия корзины)
+    .btn_close_basket:hover {
+      opacity: 1;
       cursor: pointer;
+      transition: opacity 0.15s ease-in-out;
     }
   }
 
   .items {
-    overflow: auto;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
   }
 
   li {
@@ -205,7 +224,6 @@ header {
 
   ul {
     margin-top: auto;
-    margin-bottom: 50px;
 
     div {
       flex: 1;
@@ -219,9 +237,8 @@ header {
   
   //кнопка "заказать"
   .btn_order {
-    position: absolute;
-    right: 25px;
-    bottom: 30px;
+    position: relative;
+    left: 165px;
     width: 220px;
     height: 40px;
     font-size: large;
@@ -230,7 +247,8 @@ header {
     border: 2px solid transparent;
     transition: border 0.3s ease-in-out;
     font-weight: 500;
-
+    margin-top: auto;
+    
     img {
       position: absolute;
       right: 20px;
@@ -254,6 +272,7 @@ header {
 
 //карточка товара в корзине
 .cardItem {
+  position: relative;
   border: 1px solid #f1f1f1;
   border-radius: 20px;
   margin: 10px;
@@ -274,7 +293,9 @@ header {
   }
 
   .btn_cancel {
-    align-self: flex-end;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
     opacity: 0.5;
   }
   .btn_cancel:hover {
@@ -282,4 +303,68 @@ header {
     cursor: pointer;
     transition: opacity 0.15s ease-in-out;
   }
+
 }
+
+
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1{
+    margin-right: 15px;
+  }
+}
+
+
+//пустая корзина(иконка, текст, кнопка для возврата назад)
+.emptyCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 240px;
+
+  .cart{
+    height: 180px;
+  }
+  h2{
+    font-size: 30px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+  }
+  p{
+    font-size: 18px;
+    margin-bottom: 50px;
+  }
+
+  button{
+    position: relative;
+    height: 40px;
+    width: 220px;
+    font-size: large;
+    font-weight: 500;
+    background: rgb(244, 254, 109);
+    border: 2px solid transparent;
+    transition: border 0.3s ease-in-out;
+    img{
+      position: absolute;
+      top: 12px;
+      left: 25px;
+    }
+  }
+  button:hover{
+    cursor: pointer;
+    border-color: darken($color:  rgb(254, 254, 0), $amount: 40);
+    img{
+      transform: translateX(-7px);
+    }
+  }
+  button:active{
+    background: darken($color:  rgb(244, 254, 109), $amount: 20);
+  }
+}
+
+
+
+
