@@ -81,7 +81,7 @@ function App() {
       {/* основная часть страницы - карточки товаров */}
       <div className="content">
         <div className="header2">
-          <h1>{searchValue ? `Search for: "${searchValue}"` : `All toys`}</h1>
+          <h1>{searchValue ? `Поиск: "${searchValue}"` : `All toys`}</h1>
           <div className="searchBlock">
             <img src="/img/searchLupa.svg" alt="Search"/>
             <input onChange={onChangeSearchValue} value={searchValue} placeholder="Search..." />
