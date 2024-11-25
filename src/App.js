@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import Card from './components/Card';
 import Header from './components/Header';
@@ -18,7 +19,7 @@ function App() {
   //добавление карточек товаров из бекенда на основную страницу 
   //и в корзину(если ранее туда было что-то добавлено)
   useEffect(() => {
-    axios.get('https://67177e74b910c6a6e02880de.mockapi.io/items')
+    axios.get('http://localhost:3001/all_items')
       .then(res => {
         setItems(res.data);
       })
@@ -26,24 +27,17 @@ function App() {
         console.error('Ошибка при загрузке данных карточек товаров основной страницы:', error);
       });
 
-    axios.get('https://67177e74b910c6a6e02880de.mockapi.io/basket').then(res => {
+    axios.get('http://localhost:3001/basket').then(res => {
       setBasketItems(res.data)
     })
 
   }, []);
 
 
-  // //добавление товара в избранное
-  // const onAddToFavourite = (obj) => {
-  //   setLiked(prev => [...prev, obj])
-  //   console.log(liked)
-  // }
-
-
   //добавление товара в корзину
   const onAddToBasket = async (obj) => {
     try {
-        const response = await axios.post('https://67177e74b910c6a6e02880de.mockapi.io/basket', obj);
+        const response = await axios.post('http://localhost:3001/basket', obj);
         setBasketItems(prev => [...prev, response.data]); // Используйте response.data для получения добавленного товара
     } catch (error) {
         console.error('Ошибка при добавлении товара в корзину:', error);
@@ -54,7 +48,7 @@ function App() {
   const onRemoveItemBasket = async (id) => {
     console.log('ID товара для удаления:', id);
     try {
-        await axios.delete(`https://67177e74b910c6a6e02880de.mockapi.io/basket/${id}`);
+        await axios.delete(`http://localhost:3001/basket/${id}`);
         setBasketItems(prev => prev.filter(item => item.id !== id));
     } catch (error) {
         console.error('Ошибка при удалении товара:', error);
@@ -69,12 +63,20 @@ function App() {
 
 
 
+
+
   return (
 
     <div className="wrapper">
       {cardOpened && <RightBasket items={basketItems} onClose={() => setCardOpened(false)} onRemove={onRemoveItemBasket} />}   
       {/* клик по иконке корзины */}
-      <Header onClickCard={()=>setCardOpened(true)} />    
+      <Header onClickCard={()=>setCardOpened(true)} /> 
+
+
+      <Routes>
+        <Route path="/user" exact />
+      </Routes>
+
 
       {/* основная часть страницы - карточки товаров */}
       <div className="content">

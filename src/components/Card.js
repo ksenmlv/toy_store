@@ -6,8 +6,8 @@ function Card({imageUrl, title, price, onClickPlus}) {
     //const[isClickedLike, setIsClickedLike] = useState(false)    //состояние кнопки добавления в избранные (сердце)
 
     const handleClickPlus = () => {
-      onClickPlus({imageUrl, title, price})
-      setIsClicked(!isClicked)
+      onClickPlus({ imageUrl, title, price });
+      setIsClicked(!isClicked);
     } 
 
     // const handleClickLike = () => {
@@ -20,6 +20,7 @@ function Card({imageUrl, title, price, onClickPlus}) {
           {/* <div className="favourite" onClick={handleClickLike}>
             <img onClick={() => setIsClickedLike(!isClickedLike)}  src={isClickedLike ? 'img/heart_liked.svg' : 'img/heart_unliked.svg'} alt="heart_icon" />
           </div> */}
+
           <img src={imageUrl} alt="bearbrick_1" width={200} height={200}/>
           <p>{title}</p>
           <div className="cardBottom">
